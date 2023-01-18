@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Mark.css";
 import { Marker, Popup } from "react-map-gl";
 import { LocationOnOutlined } from "@mui/icons-material";
-import PopupCard from "../PopupCard/PopupCard";
+import { PopupCard, Addpin } from "../index";
 
-const Mark = ({ pins, viewPort, currentPlaceId, setCurrentPlaceId }) => {
+const Mark = ({
+  pins,
+  viewPort,
+  currentPlaceId,
+  setCurrentPlaceId,
+  newPlace,
+  setNewPlace,
+}) => {
+  const [title, setTitle] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [rating, setRating] = useState(1);
   const handleMarkerClicked = async (id, lat, long) => {
     setCurrentPlaceId(id);
   };
+
+  const handlePinSubmit = () => {};
+
   return (
     <>
       {pins.map((el, i) => (
@@ -34,6 +47,23 @@ const Mark = ({ pins, viewPort, currentPlaceId, setCurrentPlaceId }) => {
           )}
         </div>
       ))}
+      {newPlace && (
+        <Popup
+          longitude={newPlace.long}
+          latitude={newPlace.lat}
+          closeOnClick={false}
+          closeOnMove={false}
+          onClose={() => setNewPlace(null)}
+          anchor="left"
+        >
+          <Addpin
+            handlePinSubmit={handlePinSubmit}
+            setTitle={setTitle}
+            setDescription={setDescription}
+            setRating={setRating}
+          />
+        </Popup>
+      )}
     </>
   );
 };
