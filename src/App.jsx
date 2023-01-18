@@ -3,9 +3,10 @@ import "./App.css";
 import Map, { NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { getAllpins } from "./utils";
-import { Mark } from "./component";
+import { Mark, Register, Login } from "./component";
 
 function App() {
+  const [cuurUser, setCurrUser] = useState(null);
   const [pins, setPins] = useState([]);
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
   const [newPlace, setNewPlace] = useState(null);
@@ -14,6 +15,8 @@ function App() {
     latitude: 38.8,
     zoom: 14,
   });
+  const [showRegister, setShowReister] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
 
   const handleAddClick = (e) => {
     let lat = e.lngLat.lat;
@@ -56,6 +59,20 @@ function App() {
           setNewPlace={setNewPlace}
         />
       </Map>
+      <div className="footer">
+        <div className="footerdown">
+          {cuurUser ? (
+            <button className="logoutbutton">Log out</button>
+          ) : (
+            <div>
+              <button className="loginbutton">Log In</button>
+              <button className="reigisterbutton">Register</button>
+            </div>
+          )}
+        </div>
+      </div>
+      {showRegister}
+      {showLogin}
     </div>
   );
 }
