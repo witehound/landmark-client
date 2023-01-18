@@ -7,6 +7,12 @@ import { Mark } from "./component";
 
 function App() {
   const [pins, setPins] = useState([]);
+  const [currentPlaceId, setCurrentPlaceId] = useState(null);
+  const [viewPort, setViewPort] = useState({
+    longitude: 12.4,
+    latitude: 38.8,
+    zoom: 14,
+  });
   useEffect(() => {
     const getPins = async () => {
       const { data } = await getAllpins();
@@ -20,13 +26,18 @@ function App() {
       <Map
         container={`map`}
         projection={`globe`}
-        initialViewState={{}}
+        initialViewState={{ viewPort }}
         style={{ width: "100vw", height: "100vh" }}
         mapboxAccessToken={import.meta.env.VITE_MAP_BOX_TOKEN}
         mapStyle={`mapbox://styles/wingedanubis/cld1ff9b7000o01phg2gw97bm`}
       >
         <NavigationControl />
-        <Mark pins={pins} />
+        <Mark
+          pins={pins}
+          viewPort={viewPort}
+          currentPlaceId={currentPlaceId}
+          setCurrentPlaceId={setCurrentPlaceId}
+        />
       </Map>
     </div>
   );
