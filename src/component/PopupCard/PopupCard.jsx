@@ -16,8 +16,12 @@ const PopupCard = ({ p }) => {
       </div>
       <label>Information</label>
       <div className="info">
-        <span className="username">Created by </span>
-        {p.userName}
+        <span className="username">
+          Created by{" "}
+          <h4>
+            {"  "} {p.userName}
+          </h4>
+        </span>
         <span className="date">{format(p.createdAt)}</span>
       </div>
     </div>
