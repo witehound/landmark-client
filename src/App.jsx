@@ -15,7 +15,7 @@ function App() {
     latitude: 38.8,
     zoom: 14,
   });
-  const [showRegister, setShowReister] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
 
   const handleAddClick = (e) => {
@@ -25,6 +25,24 @@ function App() {
       lat,
       long,
     });
+  };
+
+  const handleShowAuth = (auth) => {
+    if (auth === "LOGIN") {
+      if (showLogin == true) {
+        setShowLogin(false);
+        return;
+      }
+      setShowLogin(true);
+      setShowRegister(false);
+    } else if (auth === "REGISTER") {
+      if (showRegister == true) {
+        setShowRegister(false);
+        return;
+      }
+      setShowRegister(true);
+      setShowLogin(false);
+    }
   };
 
   useEffect(() => {
@@ -42,7 +60,7 @@ function App() {
         container={`map`}
         projection={`globe`}
         initialViewState={{ viewPort }}
-        style={{ width: "100vw", height: "100vh" }}
+        style={{ width: "10vw", height: "100vh" }}
         mapboxAccessToken={import.meta.env.VITE_MAP_BOX_TOKEN}
         mapStyle={`mapbox://styles/wingedanubis/cld1ff9b7000o01phg2gw97bm`}
         onDblClick={(e) => {
@@ -65,14 +83,24 @@ function App() {
             <button className="logoutbutton">Log out</button>
           ) : (
             <div>
-              <button className="loginbutton">Log In</button>
-              <button className="reigisterbutton">Register</button>
+              <button
+                className="loginbutton"
+                onClick={(e) => handleShowAuth("LOGIN")}
+              >
+                Log In
+              </button>
+              <button
+                className="reigisterbutton"
+                onClick={() => handleShowAuth("REGISTER")}
+              >
+                Register
+              </button>
             </div>
           )}
         </div>
       </div>
-      {showRegister}
-      {showLogin}
+      {showRegister && <Register />}
+      {showLogin && <Login />}
     </div>
   );
 }

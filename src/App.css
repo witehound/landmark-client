@@ -31,3 +31,59 @@ textarea::placeholder {
   font-size: 12px;
   color: lightgrey;
 }
+
+.footer {
+  position: absolute;
+  display: flex;
+  padding: 10px;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+  bottom: 0;
+  background-color: rgb(16, 29, 49);
+  z-index: 10;
+  box-shadow: rgb(136, 165, 191, 0.48) 6px 2px 16px 0px,
+    rgba(255, 255, 255, 0.1) -6px -2px 16px 0px;
+}
+
+.footerdown {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  border: none;
+  padding: 5px;
+  color: white;
+  cursor: pointer;
+  margin: 0 20px;
+  height: 30px;
+  width: 120px;
+}
+
+.logoutbutton {
+  background-color: tomato;
+}
+
+.loginbutton {
+  background-color: teal;
+}
+
+.reigisterbutton {
+  background-color: rgb(45, 45, 188);
+}
+
+.logoutbutton:hover {
+  background-color: rgb(255, 68, 35);
+}
+
+.loginbutton:hover {
+  background-color: rgba(0, 76, 76);
+}
+
+.reigisterbutton:hover {
+  background-color: darkblue;
+}
