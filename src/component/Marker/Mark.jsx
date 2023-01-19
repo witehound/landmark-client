@@ -14,6 +14,7 @@ const Mark = ({
   handleInputChange,
   handlePinSubmit,
   cuurUser,
+  handleDeletePin,
 }) => {
   const handleMarkerClicked = async (id, lat, long) => {
     setCurrentPlaceId(id);
@@ -40,7 +41,7 @@ const Mark = ({
               closeOnMove={false}
               anchor="left"
             >
-              <PopupCard p={el} />
+              <PopupCard p={el} key={i} handleDeletePin={handleDeletePin} />
             </Popup>
           )}
         </div>

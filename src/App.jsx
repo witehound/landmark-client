@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Map, { NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { getAllpins, loginUser, registerUser, craetepin } from "./utils";
+import {
+  getAllpins,
+  loginUser,
+  registerUser,
+  craetepin,
+  deletePin,
+} from "./utils";
 import { Mark, Register, Login } from "./component";
 import { userData } from "./assets/constant";
 
@@ -117,6 +123,14 @@ function App() {
     setPins(data);
   };
 
+  const handleDeletePin = async (id) => {
+    if (cuurUser === null) {
+      return;
+    }
+    await deletePin(id);
+    getPins();
+  };
+
   useEffect(() => {
     getPins();
   }, []);
@@ -145,6 +159,7 @@ function App() {
           handleInputChange={handleInputChange}
           handlePinSubmit={handlePinSubmit}
           cuurUser={cuurUser}
+          handleDeletePin={handleDeletePin}
         />
       </Map>
       <div className="footer">

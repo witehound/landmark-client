@@ -3,7 +3,7 @@ import "./PopupCard.css";
 import { Star } from "@mui/icons-material";
 import { format } from "timeago.js";
 
-const PopupCard = ({ p }) => {
+const PopupCard = ({ p, handleDeletePin }) => {
   return (
     <div className="card">
       <label>Place</label>
@@ -15,7 +15,9 @@ const PopupCard = ({ p }) => {
         {Array(p.rating).fill(<Star className="star" />)}
       </div>
       <label>Information</label>
-      <button className="delete">Delete</button>
+      <button className="delete" onClick={() => handleDeletePin(p._id)}>
+        Delete
+      </button>
       <div className="info">
         <span className="username">
           Created by{" "}

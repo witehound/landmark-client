@@ -20,6 +20,14 @@ export const craetepin = async (body) => {
   }
 };
 
+export const deletePin = async (id) => {
+  try {
+    axios.delete(`${baseUrl}/pin/${id}`);
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
 export const loginUser = async (body) => {
   try {
     const res = axios.post(`${baseUrl}/user/login`, body);

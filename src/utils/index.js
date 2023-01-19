@@ -1,3 +1,9 @@
-import { getAllpins, craetepin, loginUser, registerUser } from "./api";
+import {
+  getAllpins,
+  craetepin,
+  loginUser,
+  registerUser,
+  deletePin,
+} from "./api";
 
-export { getAllpins, craetepin, loginUser, registerUser };
+export { getAllpins, craetepin, loginUser, registerUser, deletePin };
