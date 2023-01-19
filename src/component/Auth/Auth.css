@@ -16,6 +16,24 @@
   padding: 5px;
 }
 
+.registercontainer {
+  height: 240px;
+  width: 280px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  align-items: center;
+  background-color: whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 5px;
+}
+
 .logintitle {
   flex: 1;
   display: flex;
@@ -31,6 +49,7 @@
 .cancelicon {
   position: absolute;
   right: 5px;
+  top: 5px;
   padding: auto;
   height: 7px;
   width: 7px;

@@ -41,6 +41,8 @@ function App() {
     handleExitAuth();
   };
 
+  const handleRegister = async (e) => {};
+
   const handleExitAuth = () => {
     setShowLogin(false);
     setShowRegister(false);
@@ -128,7 +130,7 @@ function App() {
       </div>
       {showRegister && (
         <Register
-          setShowRegister={setShowRegister}
+          handleRegister={handleRegister}
           handleExitAuth={handleExitAuth}
           handleInputChange={handleInputChange}
         />

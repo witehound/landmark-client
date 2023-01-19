@@ -4,7 +4,7 @@ import { ExitToAppOutlined, CancelOutlined } from "@mui/icons-material";
 
 const Login = ({ handleLogin, handleExitAuth, handleInputChange }) => {
   return (
-    <div className="logincontainer">
+    <div className="registercontainer">
       <div className="logintitle">
         <div className="logintitlemain">
           <ExitToAppOutlined className="" /> Login to your account
