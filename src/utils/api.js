@@ -19,3 +19,12 @@ export const loginUser = async (body) => {
     console.log(err.message);
   }
 };
+
+export const registerUser = async (body) => {
+  try {
+    const res = axios.post(`${baseUrl}/user/register`, body);
+    return res;
+  } catch (err) {
+    console.log(err.message);
+  }
+};

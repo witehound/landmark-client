@@ -1,3 +1,3 @@
-import { getAllpins, loginUser } from "./api";
+import { getAllpins, loginUser, registerUser } from "./api";
 
-export { getAllpins, loginUser };
+export { getAllpins, loginUser, registerUser };

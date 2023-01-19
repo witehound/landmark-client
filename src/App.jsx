@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Map, { NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { getAllpins, loginUser } from "./utils";
+import { getAllpins, loginUser, registerUser } from "./utils";
 import { Mark, Register, Login } from "./component";
 import { userData } from "./assets/constant";
 
@@ -41,7 +41,17 @@ function App() {
     handleExitAuth();
   };
 
-  const handleRegister = async (e) => {};
+  const handleRegister = async (e) => {
+    const { userName, password, email } = userInput;
+    e.preventDefault();
+    if (userName === "" || password === " " || email === "") {
+      handleExitAuth();
+      return;
+    }
+    const { data } = await registerUser({ userName, password, email });
+    setCurrUser(data.userName);
+    handleExitAuth();
+  };
 
   const handleExitAuth = () => {
     setShowLogin(false);
@@ -88,7 +98,7 @@ function App() {
         container={`map`}
         projection={`globe`}
         initialViewState={{ viewPort }}
-        style={{ width: "10vw", height: "100vh" }}
+        style={{ width: "100vw", height: "100vh" }}
         mapboxAccessToken={import.meta.env.VITE_MAP_BOX_TOKEN}
         mapStyle={`mapbox://styles/wingedanubis/cld1ff9b7000o01phg2gw97bm`}
         onDblClick={(e) => {
