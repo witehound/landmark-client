@@ -8,9 +8,18 @@ import {
   registerUser,
   craetepin,
   deletePin,
+  pinAdd,
+  pinGet,
+  pinDelete,
+  userLogin,
+  userLogout,
+  userRegister,
 } from "./utils";
+import { success } from "./assets/constant";
 import { Mark, Register, Login } from "./component";
 import { userData } from "./assets/constant";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [cuurUser, setCurrUser] = useState(null);
@@ -39,11 +48,14 @@ function App() {
     const { userName, password } = userInput;
     e.preventDefault();
     if (userName === "" || password === " ") {
+      userLogin();
+      userLogin();
       handleExitAuth();
       return;
     }
     const { data } = await loginUser({ userName, password });
     setCurrUser(data.userName);
+    userLogin(success);
     handleExitAuth();
   };
 
@@ -51,11 +63,13 @@ function App() {
     const { userName, password, email } = userInput;
     e.preventDefault();
     if (userName === "" || password === " " || email === "") {
+      userRegister();
       handleExitAuth();
       return;
     }
     const { data } = await registerUser({ userName, password, email });
     setCurrUser(data);
+    userRegister(success);
     handleExitAuth();
   };
 
@@ -71,6 +85,7 @@ function App() {
       lat === null ||
       long === null
     ) {
+      pinAdd();
       setNewPlace(null);
       handleExitAuth();
       return;
@@ -83,6 +98,7 @@ function App() {
       long,
       lat,
     });
+    pinAdd(success);
     setNewPlace(null);
     getPins();
     handleExitAuth();
@@ -120,15 +136,24 @@ function App() {
 
   const getPins = async () => {
     const { data } = await getAllpins();
+    getPins(success);
     setPins(data);
   };
 
   const handleDeletePin = async (id) => {
     if (cuurUser === null) {
+      pinDelete();
       return;
     }
     await deletePin(id);
+    pinDelete(success);
+    window.location.reload(false);
     getPins();
+  };
+
+  const handleLogOut = () => {
+    setCurrUser(null);
+    userLogout(success);
   };
 
   useEffect(() => {
@@ -148,6 +173,7 @@ function App() {
           handleAddClick(e);
         }}
       >
+        <ToastContainer position="top-left" theme="dark" />
         <NavigationControl />
         <Mark
           pins={pins}
@@ -165,7 +191,9 @@ function App() {
       <div className="footer">
         <div className="footerdown">
           {cuurUser ? (
-            <button className="logoutbutton">Log out</button>
+            <button className="logoutbutton" onClick={handleLogOut}>
+              Log out
+            </button>
           ) : (
             <div>
               <button

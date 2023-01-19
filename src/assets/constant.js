@@ -7,4 +7,6 @@ const userData = {
   description: "",
 };
 
-export { userData };
+const success = "success";
+
+export { userData, success };

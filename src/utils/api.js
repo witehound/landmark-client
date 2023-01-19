@@ -1,4 +1,5 @@
 import axios from "axios";
+import { pinAdd, pinGet, pinDelete, userLogin, userRegister } from "../utils";
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -7,7 +8,7 @@ export const getAllpins = async () => {
     const res = axios.get(`${baseUrl}/pin`);
     return res;
   } catch (err) {
-    console.log(err.message);
+    pinGet();
   }
 };
 
@@ -16,7 +17,7 @@ export const craetepin = async (body) => {
     const res = axios.post(`${baseUrl}/pin`, body);
     return res;
   } catch (err) {
-    console.log(err.message);
+    pinAdd();
   }
 };
 
@@ -24,7 +25,7 @@ export const deletePin = async (id) => {
   try {
     axios.delete(`${baseUrl}/pin/${id}`);
   } catch (err) {
-    console.log(err.message);
+    pinDelete();
   }
 };
 
@@ -33,7 +34,7 @@ export const loginUser = async (body) => {
     const res = axios.post(`${baseUrl}/user/login`, body);
     return res;
   } catch (err) {
-    console.log(err.message);
+    userLogin();
   }
 };
 
@@ -42,6 +43,6 @@ export const registerUser = async (body) => {
     const res = axios.post(`${baseUrl}/user/register`, body);
     return res;
   } catch (err) {
-    console.log(err.message);
+    userRegister();
   }
 };
