@@ -35,6 +35,10 @@ function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [userInput, setUserInput] = useState(userData);
 
+  const setLocalStorageUser = (user) => {
+    localStorage.setItem("user", user);
+  };
+
   const handleAddClick = (e) => {
     let lat = e.lngLat.lat;
     let long = e.lngLat.lng;
@@ -49,14 +53,20 @@ function App() {
     e.preventDefault();
     if (userName === "" || password === " ") {
       userLogin();
-      userLogin();
       handleExitAuth();
       return;
     }
-    const { data } = await loginUser({ userName, password });
-    setCurrUser(data.userName);
-    userLogin(success);
-    handleExitAuth();
+
+    try {
+      const { data } = await loginUser({ userName, password });
+      setCurrUser(data.userName);
+      setLocalStorageUser(data.userName);
+      userLogin(success);
+      handleExitAuth();
+    } catch (error) {
+      userLogin();
+      handleExitAuth();
+    }
   };
 
   const handleRegister = async (e) => {
@@ -67,14 +77,20 @@ function App() {
       handleExitAuth();
       return;
     }
-    const { data } = await registerUser({ userName, password, email });
-    setCurrUser(data);
-    userRegister(success);
-    handleExitAuth();
+
+    try {
+      const { data } = await registerUser({ userName, password, email });
+      setCurrUser(data);
+      setLocalStorageUser(data);
+      userRegister(success);
+      handleExitAuth();
+    } catch (error) {
+      userRegister();
+      handleExitAuth();
+    }
   };
 
   const handlePinSubmit = async (e) => {
-    const { title, rating, description } = userInput;
     const { long, lat } = newPlace;
     e.preventDefault();
     if (
@@ -90,6 +106,7 @@ function App() {
       handleExitAuth();
       return;
     }
+
     await craetepin({
       userName: cuurUser,
       title,
@@ -154,10 +171,13 @@ function App() {
   const handleLogOut = () => {
     setCurrUser(null);
     userLogout(success);
+    localStorage.removeItem("user");
   };
 
   useEffect(() => {
     getPins();
+    const user = localStorage.getItem("user");
+    if (user) setCurrUser(user);
   }, []);
 
   return (

@@ -3,7 +3,7 @@ const userData = {
   email: "",
   password: "",
   title: "",
-  rating: "",
+  rating: "1",
   description: "",
 };
 

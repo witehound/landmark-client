@@ -5,7 +5,7 @@ import { format } from "timeago.js";
 
 const PopupCard = ({ p, handleDeletePin }) => {
   return (
-    <div className="card">
+    <div className="card" key={p._id}>
       <label>Place</label>
       <h4 className="place">{p.title}</h4>
       <label>Review</label>
