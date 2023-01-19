@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Map, { NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { getAllpins, loginUser, registerUser } from "./utils";
+import { getAllpins, loginUser, registerUser, craetepin } from "./utils";
 import { Mark, Register, Login } from "./component";
 import { userData } from "./assets/constant";
 
@@ -53,6 +53,35 @@ function App() {
     handleExitAuth();
   };
 
+  const handlePinSubmit = async (e) => {
+    const { title, rating, description } = userInput;
+    const { long, lat } = newPlace;
+    e.preventDefault();
+    if (
+      cuurUser === null ||
+      title === "" ||
+      rating === "" ||
+      description === "" ||
+      lat === null ||
+      long === null
+    ) {
+      handleExitAuth();
+      return;
+    }
+    await craetepin({
+      userName: cuurUser,
+      title,
+      rating,
+      description,
+      long,
+      lat,
+    });
+
+    setNewPlace(null);
+    getPins();
+    handleExitAuth();
+  };
+
   const handleExitAuth = () => {
     setShowLogin(false);
     setShowRegister(false);
@@ -83,12 +112,12 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    const getPins = async () => {
-      const { data } = await getAllpins();
-      setPins(data);
-    };
+  const getPins = async () => {
+    const { data } = await getAllpins();
+    setPins(data);
+  };
 
+  useEffect(() => {
     getPins();
   }, []);
 
@@ -114,6 +143,7 @@ function App() {
           newPlace={newPlace}
           setNewPlace={setNewPlace}
           handleInputChange={handleInputChange}
+          handlePinSubmit={handlePinSubmit}
         />
       </Map>
       <div className="footer">

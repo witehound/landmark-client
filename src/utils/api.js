@@ -11,6 +11,15 @@ export const getAllpins = async () => {
   }
 };
 
+export const craetepin = async (body) => {
+  try {
+    const res = axios.post(`${baseUrl}/pin`, body);
+    return res;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
 export const loginUser = async (body) => {
   try {
     const res = axios.post(`${baseUrl}/user/login`, body);

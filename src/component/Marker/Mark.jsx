@@ -12,12 +12,11 @@ const Mark = ({
   newPlace,
   setNewPlace,
   handleInputChange,
+  handlePinSubmit,
 }) => {
   const handleMarkerClicked = async (id, lat, long) => {
     setCurrentPlaceId(id);
   };
-
-  const handlePinSubmit = () => {};
 
   return (
     <>
