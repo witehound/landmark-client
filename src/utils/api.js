@@ -10,3 +10,12 @@ export const getAllpins = async () => {
     console.log(err.message);
   }
 };
+
+export const loginUser = async (body) => {
+  try {
+    const res = axios.post(`${baseUrl}/user/login`, body);
+    return res;
+  } catch (err) {
+    console.log(err.message);
+  }
+};

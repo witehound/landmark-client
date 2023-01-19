@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Map, { NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { getAllpins } from "./utils";
+import { getAllpins, loginUser } from "./utils";
 import { Mark, Register, Login } from "./component";
+import { userData } from "./assets/constant";
 
 function App() {
   const [cuurUser, setCurrUser] = useState(null);
@@ -17,6 +18,7 @@ function App() {
   });
   const [showRegister, setShowRegister] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [userInput, setUserInput] = useState(userData);
 
   const handleAddClick = (e) => {
     let lat = e.lngLat.lat;
@@ -25,6 +27,30 @@ function App() {
       lat,
       long,
     });
+  };
+
+  const handleLogin = async (e) => {
+    const { userName, password } = userInput;
+    e.preventDefault();
+    if (userName === "" || password === " ") {
+      handleExitAuth();
+      return;
+    }
+    const { data } = await loginUser({ userName, password });
+    setCurrUser(data.userName);
+    handleExitAuth();
+  };
+
+  const handleExitAuth = () => {
+    setShowLogin(false);
+    setShowRegister(false);
+    setUserInput(userData);
+  };
+
+  const handleInputChange = (e) => {
+    if (userData[e.target.name] != null) {
+      setUserInput({ ...userInput, [e.target.name]: e.target.value });
+    }
   };
 
   const handleShowAuth = (auth) => {
@@ -60,7 +86,7 @@ function App() {
         container={`map`}
         projection={`globe`}
         initialViewState={{ viewPort }}
-        style={{ width: "100vw", height: "100vh" }}
+        style={{ width: "10vw", height: "100vh" }}
         mapboxAccessToken={import.meta.env.VITE_MAP_BOX_TOKEN}
         mapStyle={`mapbox://styles/wingedanubis/cld1ff9b7000o01phg2gw97bm`}
         onDblClick={(e) => {
@@ -75,6 +101,7 @@ function App() {
           setCurrentPlaceId={setCurrentPlaceId}
           newPlace={newPlace}
           setNewPlace={setNewPlace}
+          handleInputChange={handleInputChange}
         />
       </Map>
       <div className="footer">
@@ -99,8 +126,20 @@ function App() {
           )}
         </div>
       </div>
-      {showRegister && <Register />}
-      {showLogin && <Login />}
+      {showRegister && (
+        <Register
+          setShowRegister={setShowRegister}
+          handleExitAuth={handleExitAuth}
+          handleInputChange={handleInputChange}
+        />
+      )}
+      {showLogin && (
+        <Login
+          handleLogin={handleLogin}
+          handleExitAuth={handleExitAuth}
+          handleInputChange={handleInputChange}
+        />
+      )}
     </div>
   );
 }

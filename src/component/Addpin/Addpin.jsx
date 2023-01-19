@@ -1,7 +1,7 @@
 import React from "react";
 import "./Addpin.css";
 
-const Addpin = ({ handlePinSubmit, setTitle, setDescription, setRating }) => {
+const Addpin = ({ handlePinSubmit, handleInputChange }) => {
   return (
     <div className="">
       <form onSubmit={handlePinSubmit}>
@@ -9,19 +9,22 @@ const Addpin = ({ handlePinSubmit, setTitle, setDescription, setRating }) => {
         <input
           type="text"
           placeholder="enter a title"
-          onChange={(e) => setTitle(e.target.value)}
+          name="title"
+          onChange={(e) => handleInputChange(e)}
         />
         <label>Review</label>
         <textarea
           type="text"
           placeholder="say something about this place"
-          onChange={(e) => setDescription(e.target.value)}
+          name="description"
+          onChange={(e) => handleInputChange(e)}
         />
         <label>Ratings</label>
         <select
           type="text"
           placeholder="enter a title"
-          onChange={(e) => setRating(e.target.value)}
+          name="rating"
+          onChange={(e) => handleInputChange(e)}
         >
           <option value="1">1</option>
           <option value="2">2</option>

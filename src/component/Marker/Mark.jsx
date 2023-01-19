@@ -11,10 +11,8 @@ const Mark = ({
   setCurrentPlaceId,
   newPlace,
   setNewPlace,
+  handleInputChange,
 }) => {
-  const [title, setTitle] = useState(null);
-  const [description, setDescription] = useState(null);
-  const [rating, setRating] = useState(1);
   const handleMarkerClicked = async (id, lat, long) => {
     setCurrentPlaceId(id);
   };
@@ -53,14 +51,14 @@ const Mark = ({
           latitude={newPlace.lat}
           closeOnClick={false}
           closeOnMove={false}
-          onClose={() => setNewPlace(null)}
+          onClose={() => {
+            setNewPlace(null);
+          }}
           anchor="left"
         >
           <Addpin
             handlePinSubmit={handlePinSubmit}
-            setTitle={setTitle}
-            setDescription={setDescription}
-            setRating={setRating}
+            handleInputChange={handleInputChange}
           />
         </Popup>
       )}
