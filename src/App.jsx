@@ -60,7 +60,7 @@ function App() {
         container={`map`}
         projection={`globe`}
         initialViewState={{ viewPort }}
-        style={{ width: "10vw", height: "100vh" }}
+        style={{ width: "100vw", height: "100vh" }}
         mapboxAccessToken={import.meta.env.VITE_MAP_BOX_TOKEN}
         mapStyle={`mapbox://styles/wingedanubis/cld1ff9b7000o01phg2gw97bm`}
         onDblClick={(e) => {
