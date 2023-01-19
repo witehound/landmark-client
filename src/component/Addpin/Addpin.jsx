@@ -3,8 +3,8 @@ import "./Addpin.css";
 
 const Addpin = ({ handlePinSubmit, handleInputChange }) => {
   return (
-    <div className="">
-      <form onSubmit={(e) => handlePinSubmit(e)}>
+    <div className="addpincontainer">
+      <form onSubmit={(e) => handlePinSubmit(e)} className="addpinform">
         <label>Title</label>
         <input
           type="text"

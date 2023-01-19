@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Mark.css";
 import { Marker, Popup } from "react-map-gl";
-import { LocationOnOutlined } from "@mui/icons-material";
+import { LocationOn } from "@mui/icons-material";
 import { PopupCard, Addpin } from "../index";
 
 const Mark = ({
@@ -13,6 +13,7 @@ const Mark = ({
   setNewPlace,
   handleInputChange,
   handlePinSubmit,
+  cuurUser,
 }) => {
   const handleMarkerClicked = async (id, lat, long) => {
     setCurrentPlaceId(id);
@@ -23,12 +24,12 @@ const Mark = ({
       {pins.map((el, i) => (
         <div key={i}>
           <Marker longitude={el.long} latitude={el.lat} anchor="center">
-            <LocationOnOutlined
-              className="icon"
+            <LocationOn
               onClick={() => {
                 handleMarkerClicked(el._id, el.long, el.lat);
               }}
-              style={{ fontSize: viewPort.zoom * 2, color: "slateblue" }}
+              style={{ fontSize: viewPort.zoom * 2 }}
+              className={`${cuurUser ? `activeuserpin` : `otheruserpin`} icon`}
             />
           </Marker>
           {el._id === currentPlaceId && (

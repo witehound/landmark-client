@@ -1,9 +1,32 @@
+.addpincontainer {
+  height: 280px;
+  width: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.mapboxgl-popup-close-button {
+  background-color: tomato;
+  right: 0;
+  margin: 0;
+}
+
+.addpinform {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .submitbutton {
   border-radius: 5px;
   border: none;
   padding: 5px;
   color: white;
   background-color: rgb(253, 123, 100);
+  margin: 0 auto;
+  border-radius: 5px;
 }
 
 .submitbutton:hover {

@@ -65,6 +65,7 @@ function App() {
       lat === null ||
       long === null
     ) {
+      setNewPlace(null);
       handleExitAuth();
       return;
     }
@@ -76,7 +77,6 @@ function App() {
       long,
       lat,
     });
-
     setNewPlace(null);
     getPins();
     handleExitAuth();
@@ -144,6 +144,7 @@ function App() {
           setNewPlace={setNewPlace}
           handleInputChange={handleInputChange}
           handlePinSubmit={handlePinSubmit}
+          cuurUser={cuurUser}
         />
       </Map>
       <div className="footer">

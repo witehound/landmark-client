@@ -15,6 +15,7 @@ const PopupCard = ({ p }) => {
         {Array(p.rating).fill(<Star className="star" />)}
       </div>
       <label>Information</label>
+      <button className="delete">Delete</button>
       <div className="info">
         <span className="username">
           Created by{" "}

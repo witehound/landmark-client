@@ -26,8 +26,16 @@
   color: grey;
 }
 
+.delete {
+  background-color: red;
+  margin: 5px auto;
+}
+
+.delete:hover {
+  background-color: rgb(156, 4, 4);
+}
+
 .username {
   display: flex;
-
   gap: 4;
 }
