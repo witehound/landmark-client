@@ -49,7 +49,7 @@ function App() {
       return;
     }
     const { data } = await registerUser({ userName, password, email });
-    setCurrUser(data.userName);
+    setCurrUser(data);
     handleExitAuth();
   };
 
